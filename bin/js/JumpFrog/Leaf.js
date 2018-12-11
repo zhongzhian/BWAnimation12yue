@@ -17,20 +17,33 @@ var Leaf = /** @class */ (function (_super) {
         _this.isJump = false;
         // this.bg.skin = "JumpFrog/leaf2.png";
         _this.word.text = word;
+        _this.frog.visible = false;
         _this.on(Laya.Event.CLICK, _this, _this.click);
         return _this;
     }
     // 被点击
     Leaf.prototype.click = function () {
+        if (JumpFrog.jumpFrogMain.replayAble.visible)
+            return;
         if (this.bg.skin == "JumpFrog/leaf2.png") {
             if (!this.isJump) {
                 this.bg.skin = "JumpFrog/leaf1.png";
                 this.isJump = true;
+                Laya.timer.once(1000, this, this.showFrog);
             }
         }
         else {
             this.bg.skin = "JumpFrog/leaf2.png";
+            Laya.SoundManager.playSound("res/audio/JumpFrog/leaf.mp3", 1);
         }
+    };
+    Leaf.prototype.showFrog = function () {
+        JumpFrog.jumpFrogMain.updateLeaf();
+        Laya.SoundManager.playSound("res/audio/JumpFrog/frogjump.mp3", 1);
+        this.frog.visible = true;
+    };
+    Leaf.prototype.hideFrog = function () {
+        this.frog.visible = false;
     };
     Leaf.prototype.setPos = function (x, y) {
         this.pos(x, y);
@@ -42,11 +55,13 @@ var Leaf = /** @class */ (function (_super) {
     // 飘动
     Leaf.prototype.shake1 = function () {
         // if (this.isLeaving) return;
-        Laya.Tween.to(this, { y: this.initY - 10 }, Math.random() * 2000 + 1000, null, Laya.Handler.create(this, this.shake2));
+        Laya.Tween.to(this, { y: this.initY - 5 }, Math.random() * 2000 + 1000, null, Laya.Handler.create(this, this.shake2));
+        // Laya.Tween.to(this, { y: this.initY - 10 }, 3000, null, Laya.Handler.create(this, this.shake2));
     };
     Leaf.prototype.shake2 = function () {
         // if (this.isLeaving) return;
         Laya.Tween.to(this, { y: this.initY }, Math.random() * 2000 + 1000, null, Laya.Handler.create(this, this.shake1));
+        // Laya.Tween.to(this, { y: this.initY }, 3000, null, Laya.Handler.create(this, this.shake1));
     };
     // 图片晃动
     Leaf.prototype.shake = function () {

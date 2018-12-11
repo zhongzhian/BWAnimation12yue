@@ -1,27 +1,41 @@
 // 泡泡游戏
 import Stage = Laya.Stage;
-import WebGL   = Laya.WebGL;
+import WebGL = Laya.WebGL;
 import Sprite = Laya.Sprite;
 class JumpFrogMain extends ui.JumpFrogUI {
     private configView: JFConfigView; // 配置页
     public maxX: number = 1000; //
     public maxY: number = 478; //
-    private soundArr: Array<any>; //
+    private posArr: Array<any> = [
+        [321, 39],
+        [445, 151],
+        [451, 277],
+        [109, 163],
+        [748, 186],
+        [685, 47],
+        [143, 286],
+        [15, 18],
+
+        [453, -88],
+        [348, 405],
+        [30, 406],
+        [737, -88],
+    ]; //
     public soundContext: number = 0; //
     public wordContext: string = ""; //
-    // public is
 
     constructor() {
-        super(); 
+        super();
         this.configView = new JFConfigView(this.configBox);
         this.tip.visible = false;
         this.setting.on(Laya.Event.CLICK, this, this.showConfigView);
-        if(JumpFrog.gameConfig.gameModel) {
-            this.setting.visible = false;    
+        if (JumpFrog.gameConfig.gameModel) {
+            this.setting.visible = false;
         }
         this.restart();
 
-        this.replayAble.on(Laya.Event.CLICK,this,this.restart);
+        this.replayAble.on(Laya.Event.CLICK, this, this.restart);
+        this.crown.on(Laya.Event.CLICK, this, this.checkOver);
     }
 
     // 游戏重新开始
@@ -30,32 +44,74 @@ class JumpFrogMain extends ui.JumpFrogUI {
         this.init();
     }
 
-    public gameover(){
+    public gameover() {
         this.replayAble.visible = true;
         this.wordContext = "";
     }
 
     //初始化
-    public init(){
-
-        // 用来计算随机偏移量
-        let perx = this.maxX/20;
-        let pery = this.maxX/10;
-        let posRan = this.getRandomArr(10);
+    public init() {
+        let rannum = JumpFrog.gameConfig.words.length < 9 ? 8 : 12;
+        let posRan = this.getRandomArr(rannum);
         let numRan = this.getRandomArr(9);
 
-        for(let i = 0;i<JumpFrog.gameConfig.words.length;i++){
+        for (let i = 0; i < JumpFrog.gameConfig.words.length; i++) {
             let aa = JumpFrog.gameConfig.words[i];
             let item = new Leaf(aa);
-            item.setPos(100*i,100*i);
+            let pos = this.posArr[posRan[i]-1];
+            item.setPos(pos[0],pos[1]);
             item.shake1();
             this.mainpanel.addChild(item);
         }
 
         this.replayAble.visible = false;
+        this.showCrownIndex(0);
+        this.first.visible = true;
+        this.last.visible = false;
     }
 
-     // 显示提示
+    private checkOver() {
+        Laya.timer.once(400, this, function () {
+            this.updateLeaf();
+            this.last.visible = true;
+            this.changeCrown();
+        });
+    }
+
+    public updateLeaf() {
+        this.first.visible = false;
+        for (var i = 0; i < this.mainpanel.numChildren; i++) {
+            let leaf = this.mainpanel.getChildAt(i) as Leaf;
+            leaf.hideFrog();
+        }
+    }
+
+    private changeCrown() {
+        Laya.timer.once(1000, this, function () {
+            this.last.visible = false;
+            Laya.SoundManager.playSound("res/audio/JumpFrog/frogchange.mp3",1);
+            this.showCrownIndex(1);
+            Laya.timer.once(100, this, function () {
+                this.showCrownIndex(2);
+                Laya.timer.once(100, this, function () {
+                    this.showCrownIndex(3);
+                    Laya.timer.once(100, this, function () {
+                        this.showCrownIndex(4);
+                        this.gameover();
+                    });
+                });
+            });
+        });
+    }
+
+    private showCrownIndex(index: number) {
+        for (var i = 0; i < this.crownpanel.numChildren; i++) {
+            let pic = this.crownpanel.getChildAt(i) as Laya.Image;
+            pic.visible = index === i;
+        }
+    }
+
+    // 显示提示
     public showTip(text: string) {
         this.tip.text = text;
         this.tip.visible = true;
@@ -76,20 +132,20 @@ class JumpFrogMain extends ui.JumpFrogUI {
 
     // 设置设置按钮是否显示
     public showSetting(state: boolean) {
-        if(!JumpFrog.gameConfig.gameModel) {
+        if (!JumpFrog.gameConfig.gameModel) {
             this.setting.visible = state;
         }
     }
 
 
     // 返回随机数组
-    public getRandomArr(length:number = 0){
+    public getRandomArr(length: number = 0) {
         let arr = [];
-        for(var i = 0;i<length;i++){
-            arr.push(i+1);
+        for (var i = 0; i < length; i++) {
+            arr.push(i + 1);
         }
-        return arr.sort((a,b)=>{
-            return Math.random()>.5 ? -1 : 1
+        return arr.sort((a, b) => {
+            return Math.random() > .5 ? -1 : 1
         });
     }
 }

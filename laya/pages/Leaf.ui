@@ -2,6 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
+    "selecteID":5,
     "props":{"width":271,"height":111},
     "nodeParent":-1,
     "label":"View",
@@ -26,14 +27,27 @@
         },
         {
             "x":15,
-            "type":"TextInput",
-            "props":{"y":18,"x":2,"width":270,"var":"word","height":68,"fontSize":45,"font":"ff","color":"#333","bold":true,"align":"center"},
+            "type":"Text",
+            "props":{"y":24,"x":1,"width":269,"var":"word","text":"text","height":58,"fontSize":45,"font":"ff","color":"#333","bold":true,"align":"center"},
             "nodeParent":1,
-            "label":"TextInput(word)",
+            "label":"Text(word)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":3,
+            "compId":4,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "props":{"y":-39,"x":66,"var":"frog","skin":"JumpFrog/frog.png"},
+            "nodeParent":1,
+            "label":"Image(frog)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":5,
             "child":[
                 ]
         }],

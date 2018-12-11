@@ -7,7 +7,7 @@ if (gameName == "jumpfrog") {
     // 青蛙
     let config: any = {
         gameModel: false, // 是否游戏模式，游戏模式不显示配置按钮
-        words: ["blue", "orange", "green", "yellow"], // 单词,
+        words: ["blue", "orange", "green","blue", "orange", "green","blue", "orange", "green", "yellow"], // 单词,
     };
     new JumpFrog(config);
 }

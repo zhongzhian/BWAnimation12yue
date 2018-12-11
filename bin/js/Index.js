@@ -5,7 +5,7 @@ if (gameName == "jumpfrog") {
     // 青蛙
     var config = {
         gameModel: false,
-        words: ["blue", "orange", "green", "yellow"],
+        words: ["blue", "orange", "green", "blue", "orange", "green", "blue", "orange", "green", "yellow"],
     };
     new JumpFrog(config);
 }

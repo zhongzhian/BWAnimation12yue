@@ -14,11 +14,24 @@ var WebGL = Laya.WebGL;
 var Sprite = Laya.Sprite;
 var JumpFrogMain = /** @class */ (function (_super) {
     __extends(JumpFrogMain, _super);
-    // public is
     function JumpFrogMain() {
         var _this = _super.call(this) || this;
         _this.maxX = 1000; //
         _this.maxY = 478; //
+        _this.posArr = [
+            [321, 39],
+            [445, 151],
+            [451, 277],
+            [109, 163],
+            [748, 186],
+            [685, 47],
+            [143, 286],
+            [15, 18],
+            [453, -88],
+            [348, 405],
+            [30, 406],
+            [737, -88],
+        ]; //
         _this.soundContext = 0; //
         _this.wordContext = ""; //
         _this.configView = new JFConfigView(_this.configBox);
@@ -29,6 +42,7 @@ var JumpFrogMain = /** @class */ (function (_super) {
         }
         _this.restart();
         _this.replayAble.on(Laya.Event.CLICK, _this, _this.restart);
+        _this.crown.on(Laya.Event.CLICK, _this, _this.checkOver);
         return _this;
     }
     // 游戏重新开始
@@ -42,19 +56,58 @@ var JumpFrogMain = /** @class */ (function (_super) {
     };
     //初始化
     JumpFrogMain.prototype.init = function () {
-        // 用来计算随机偏移量
-        var perx = this.maxX / 20;
-        var pery = this.maxX / 10;
-        var posRan = this.getRandomArr(10);
+        var rannum = JumpFrog.gameConfig.words.length < 9 ? 8 : 12;
+        var posRan = this.getRandomArr(rannum);
         var numRan = this.getRandomArr(9);
         for (var i = 0; i < JumpFrog.gameConfig.words.length; i++) {
             var aa = JumpFrog.gameConfig.words[i];
             var item = new Leaf(aa);
-            item.setPos(100 * i, 100 * i);
+            var pos = this.posArr[posRan[i] - 1];
+            item.setPos(pos[0], pos[1]);
             item.shake1();
             this.mainpanel.addChild(item);
         }
         this.replayAble.visible = false;
+        this.showCrownIndex(0);
+        this.first.visible = true;
+        this.last.visible = false;
+    };
+    JumpFrogMain.prototype.checkOver = function () {
+        Laya.timer.once(400, this, function () {
+            this.updateLeaf();
+            this.last.visible = true;
+            this.changeCrown();
+        });
+    };
+    JumpFrogMain.prototype.updateLeaf = function () {
+        this.first.visible = false;
+        for (var i = 0; i < this.mainpanel.numChildren; i++) {
+            var leaf = this.mainpanel.getChildAt(i);
+            leaf.hideFrog();
+        }
+    };
+    JumpFrogMain.prototype.changeCrown = function () {
+        Laya.timer.once(1000, this, function () {
+            this.last.visible = false;
+            Laya.SoundManager.playSound("res/audio/JumpFrog/frogchange.mp3", 1);
+            this.showCrownIndex(1);
+            Laya.timer.once(100, this, function () {
+                this.showCrownIndex(2);
+                Laya.timer.once(100, this, function () {
+                    this.showCrownIndex(3);
+                    Laya.timer.once(100, this, function () {
+                        this.showCrownIndex(4);
+                        this.gameover();
+                    });
+                });
+            });
+        });
+    };
+    JumpFrogMain.prototype.showCrownIndex = function (index) {
+        for (var i = 0; i < this.crownpanel.numChildren; i++) {
+            var pic = this.crownpanel.getChildAt(i);
+            pic.visible = index === i;
+        }
     };
     // 显示提示
     JumpFrogMain.prototype.showTip = function (text) {
