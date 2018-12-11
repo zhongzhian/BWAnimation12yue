@@ -23,3 +23,20 @@ module ui {
 
     }
 }
+
+module ui {
+    export class LeafUI extends View {
+		public bg:Laya.Image;
+		public word:Laya.TextInput;
+
+        public static  uiView:any ={"type":"View","props":{"width":271,"height":111},"child":[{"type":"Image","props":{"width":271,"var":"bg","skin":"JumpFrog/leaf2.png","height":111}},{"type":"TextInput","props":{"y":18,"x":2,"width":270,"var":"word","height":68,"fontSize":45,"font":"ff","color":"#333","bold":true,"align":"center"}}]};
+        constructor(){ super()}
+        createChildren():void {
+        
+            super.createChildren();
+            this.createView(ui.LeafUI.uiView);
+
+        }
+
+    }
+}

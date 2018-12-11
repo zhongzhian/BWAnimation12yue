@@ -27,4 +27,19 @@ var ui;
     }(View));
     ui.JumpFrogUI = JumpFrogUI;
 })(ui || (ui = {}));
+(function (ui) {
+    var LeafUI = /** @class */ (function (_super) {
+        __extends(LeafUI, _super);
+        function LeafUI() {
+            return _super.call(this) || this;
+        }
+        LeafUI.prototype.createChildren = function () {
+            _super.prototype.createChildren.call(this);
+            this.createView(ui.LeafUI.uiView);
+        };
+        LeafUI.uiView = { "type": "View", "props": { "width": 271, "height": 111 }, "child": [{ "type": "Image", "props": { "width": 271, "var": "bg", "skin": "JumpFrog/leaf2.png", "height": 111 } }, { "type": "TextInput", "props": { "y": 18, "x": 2, "width": 270, "var": "word", "height": 68, "fontSize": 45, "font": "ff", "color": "#333", "bold": true, "align": "center" } }] };
+        return LeafUI;
+    }(View));
+    ui.LeafUI = LeafUI;
+})(ui || (ui = {}));
 //# sourceMappingURL=layaUI.max.all.js.map

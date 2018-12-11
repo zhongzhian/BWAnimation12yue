@@ -46,7 +46,10 @@ class JumpFrogMain extends ui.JumpFrogUI {
 
         for(let i = 0;i<JumpFrog.gameConfig.words.length;i++){
             let aa = JumpFrog.gameConfig.words[i];
-            // this.mainpanel.addChild(item);
+            let item = new Leaf(aa);
+            item.setPos(100*i,100*i);
+            item.shake1();
+            this.mainpanel.addChild(item);
         }
 
         this.replayAble.visible = false;
