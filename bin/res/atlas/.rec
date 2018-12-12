@@ -6,7 +6,7 @@ P 838697A5 img_radio_notCheck.png
 P 69EA0BCC replay-abled.png
 P F081FEEB replay-disabled.png
 P 68BD1283 setting-gray.png
-P 6F2E1E3C setting.png
+P FD922154 setting.png
 D JumpFrog
 R 1B3A355C bg.png
 P 5867FA37 crown.png
@@ -17,6 +17,25 @@ P 523B7402 prince.png
 P 0BF1E45C yun1.png
 P F3956C0C yun2.png
 P F33DA3B6 yun3.png
+D SplitScreenSentence
+P B0834299 answer-area-1.png
+P 9E8E4775 answer-area-2.png
+R 05AE7F22 answer.png
+R 61B86AA7 bg.png
+P 82C157CA check-down.png
+P 65D9BD1B check-start.png
+P 034BD03D correct.png
+P CF992E5A fly-1.png
+P 93000D7C fly-2.png
+P 2570175F fly-disable.png
+R EF927208 left.png
+P 7329F414 next.png
+P 023CD9C6 option-disable.png
+P EC235DC5 option.png
+R 5570D327 replay.png
+R 2FDB2DEA right.png
+P 87FFCAF2 rope.png
+P 4FBD209B wrong.png
 D template
 D template/ButtonTab
 P AE499BA2 btn_LargeTabButton_Middle.png
