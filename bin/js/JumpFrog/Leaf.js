@@ -26,8 +26,8 @@ var Leaf = /** @class */ (function (_super) {
         if (JumpFrog.jumpFrogMain.replayAble.visible)
             return;
         if (this.bg.skin == "JumpFrog/leaf2.png") {
+            this.bg.skin = "JumpFrog/leaf1.png";
             if (!this.isJump) {
-                this.bg.skin = "JumpFrog/leaf1.png";
                 this.isJump = true;
                 Laya.timer.once(1000, this, this.showFrog);
             }

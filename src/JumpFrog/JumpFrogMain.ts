@@ -7,18 +7,18 @@ class JumpFrogMain extends ui.JumpFrogUI {
     public maxX: number = 1000; //
     public maxY: number = 478; //
     private posArr: Array<any> = [
-        [321, 39],
-        [445, 151],
-        [451, 277],
+        [311, 49],
+        [495, 151],
+        [481, 327],
         [109, 163],
-        [748, 186],
-        [685, 47],
-        [143, 286],
+        [748, 216],
+        [735, 67],
+        [253, 276],
         [15, 18],
 
         [453, -88],
-        [348, 405],
-        [30, 406],
+        [258, 425],
+        [20, 356],
         [737, -88],
     ]; //
     public soundContext: number = 0; //
