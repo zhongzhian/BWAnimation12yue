@@ -71,7 +71,7 @@ class JumpFrogMain extends ui.JumpFrogUI {
     }
 
     private checkOver() {
-        Laya.timer.once(400, this, function () {
+        Laya.timer.once(100, this, function () {
             this.updateLeaf();
             this.last.visible = true;
             this.changeCrown();

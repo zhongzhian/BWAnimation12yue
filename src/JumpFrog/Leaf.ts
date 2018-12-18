@@ -19,10 +19,10 @@ class Leaf extends ui.LeafUI {
         if (JumpFrog.jumpFrogMain.replayAble.visible) return;
         if (this.bg.skin == "JumpFrog/leaf2.png") {
             this.bg.skin = "JumpFrog/leaf1.png";
-            if (!this.isJump) {
+            // if (!this.isJump) {
                 this.isJump = true;
-                Laya.timer.once(1000, this, this.showFrog);
-            }
+                Laya.timer.once(50, this, this.showFrog);
+            // }
         } else {
             this.bg.skin = "JumpFrog/leaf2.png";
             Laya.SoundManager.playSound("res/audio/JumpFrog/leaf.mp3", 1);

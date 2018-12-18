@@ -73,7 +73,7 @@ var JumpFrogMain = /** @class */ (function (_super) {
         this.last.visible = false;
     };
     JumpFrogMain.prototype.checkOver = function () {
-        Laya.timer.once(400, this, function () {
+        Laya.timer.once(100, this, function () {
             this.updateLeaf();
             this.last.visible = true;
             this.changeCrown();

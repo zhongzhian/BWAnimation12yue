@@ -27,10 +27,10 @@ var Leaf = /** @class */ (function (_super) {
             return;
         if (this.bg.skin == "JumpFrog/leaf2.png") {
             this.bg.skin = "JumpFrog/leaf1.png";
-            if (!this.isJump) {
-                this.isJump = true;
-                Laya.timer.once(1000, this, this.showFrog);
-            }
+            // if (!this.isJump) {
+            this.isJump = true;
+            Laya.timer.once(50, this, this.showFrog);
+            // }
         }
         else {
             this.bg.skin = "JumpFrog/leaf2.png";
