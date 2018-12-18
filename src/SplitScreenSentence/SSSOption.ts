@@ -46,6 +46,7 @@ class SSSOption extends ui.OptionUI {
         if(SplitScreenSentence.splitScreenSentenceMain.checked) { // 已经检查对错后不能再修改
             return;
         }
+        this.off(Laya.Event.CLICK, this, this.click);
         if(this.used) { // 已使用的选项，再点击撤回
             Laya.SoundManager.playSound("res/audio/SplitScreenSentence/huibianliang.mp3", 1);
             this.optionBgDisable.visible = false;
@@ -54,6 +55,7 @@ class SSSOption extends ui.OptionUI {
             this.canMove.pos(8, -1);
             this.used = false;
             this.answerPosition.text = this.answerPosition.text.replace(" " + this.optionText.text, "");
+            this.on(Laya.Event.CLICK, this, this.click);
         }
         else {
             this.optionBgDisable.visible = true;
@@ -65,6 +67,7 @@ class SSSOption extends ui.OptionUI {
                 this.canMove.visible = false;
                 this.answerPosition.text += " " + this.optionText.text;
                 this.used = true;
+                this.on(Laya.Event.CLICK, this, this.click);
             }));
         }
     }
