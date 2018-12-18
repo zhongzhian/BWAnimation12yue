@@ -4,10 +4,12 @@ class SSSOption extends ui.OptionUI {
     private answerPosition: Laya.Text; // 左边的答题区还是右边的答题区
     private optionBox: Laya.Sprite; // 左边的选项区还是右边的选项区
     private used: boolean = false; // 选项是否已被使用
-    constructor(text: string, answerPosition: Laya.Text, optionBox: Laya.Sprite) {
+    private positonFlag: string; // 左边的选项还是右边的选项
+    constructor(text: string, answerPosition: Laya.Text, optionBox: Laya.Sprite, positon: string) {
         super(); 
         this.answerPosition = answerPosition;
         this.optionBox = optionBox;
+        this.positonFlag = positon;
         // 初始化
         this.optionBgDisable.visible = false;
         this.flyDisable.visible = false;
@@ -54,7 +56,9 @@ class SSSOption extends ui.OptionUI {
             this.canMove.visible = true;
             this.canMove.pos(8, -1);
             this.used = false;
-            this.answerPosition.text = this.answerPosition.text.replace(" " + this.optionText.text, "");
+            let selected = this.positonFlag == "left" ? SplitScreenSentence.splitScreenSentenceMain.leftSelected : SplitScreenSentence.splitScreenSentenceMain.rightSelected;
+            selected.splice(selected.indexOf(this.optionText.text), 1);
+            SplitScreenSentence.splitScreenSentenceMain.makeSentence(selected, this.answerPosition);
             this.on(Laya.Event.CLICK, this, this.click);
         }
         else {
@@ -65,7 +69,9 @@ class SSSOption extends ui.OptionUI {
             Laya.SoundManager.playSound("res/audio/SplitScreenSentence/toanswerarea.mp3", 1);
             Laya.Tween.to(this.canMove, {x: this.canMove.x + 150 - this.x, y: this.canMove.y - 170 - this.y}, 500, null, Laya.Handler.create(this,function() {
                 this.canMove.visible = false;
-                this.answerPosition.text += " " + this.optionText.text;
+                let selected = this.positonFlag == "left" ? SplitScreenSentence.splitScreenSentenceMain.leftSelected : SplitScreenSentence.splitScreenSentenceMain.rightSelected;
+                selected.push(this.optionText.text);
+                SplitScreenSentence.splitScreenSentenceMain.makeSentence(selected, this.answerPosition);
                 this.used = true;
                 this.on(Laya.Event.CLICK, this, this.click);
             }));

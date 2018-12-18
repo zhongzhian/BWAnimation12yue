@@ -4,6 +4,8 @@ class SplitScreenSentenceMain extends ui.SplitScreenSentenceUI {
     private sentences: any[]; // 所有句子
     private currentSentenceIndex: number = -1; // 当前句子序号
     private correctOptions: string; // 当前句子正确选项拼成的字符串
+    public leftSelected: string[]; // 当前句子左边选择的
+    public rightSelected: string[]; // 当前句子右边选择的
     public checked: boolean = false; // 是否已检查对错
 
     constructor() {
@@ -95,17 +97,37 @@ class SplitScreenSentenceMain extends ui.SplitScreenSentenceUI {
         this.correctAnswer.visible = false;
         this.correctAnswer.text = this.sentences[this.currentSentenceIndex].sentence;
         this.correctOptions = "";
+        this.leftSelected = new Array<string>();
+        this.rightSelected = new Array<string>();
         let sentence = this.sentences[this.currentSentenceIndex];
         for(let i: number = 0; i < sentence.correctOptions.length; i++) {
-            this.correctOptions += " " + sentence.correctOptions[i];
+            if(this.correctOptions == "") {
+                this.correctOptions = sentence.correctOptions[i];
+            }
+            else {
+                this.correctOptions += " " + sentence.correctOptions[i];
+            }
         }
-        this.initOptions(this.leftOptions, this.answerLeft);
-        this.initOptions(this.rightOptions, this.answerRight);
-        
+        this.initOptions(this.leftOptions, this.answerLeft, "left");
+        this.initOptions(this.rightOptions, this.answerRight, "right");
+    }
+
+    // 根据已选择的选项生成句子
+    public makeSentence(selected: string[], answerPosition: Laya.Text) {
+        let sentence: string = "";
+        selected.forEach(s => {
+            if(sentence == "") {
+                sentence = s;
+            }
+            else {
+                sentence += " " + s;
+            }
+        });
+        answerPosition.text = sentence;
     }
 
     // 初始化选项
-    private initOptions(optionBox: Sprite, answerPosition: Laya.Text) {
+    private initOptions(optionBox: Sprite, answerPosition: Laya.Text, positon: string) {
         let sentence = this.sentences[this.currentSentenceIndex];
         let options = { 
             longOptions: [],
@@ -113,7 +135,7 @@ class SplitScreenSentenceMain extends ui.SplitScreenSentenceUI {
             middleOptions: []
         }
         for(let i: number = 0; i < sentence.correctOptions.length; i++) {
-            let option: SSSOption = new SSSOption(sentence.correctOptions[i], answerPosition, optionBox);
+            let option: SSSOption = new SSSOption(sentence.correctOptions[i], answerPosition, optionBox, positon);
             if(option.wd <= 140) {
                 options.shortOptions.push(option);
             }
@@ -126,7 +148,7 @@ class SplitScreenSentenceMain extends ui.SplitScreenSentenceUI {
         }
 
         for(let i: number = 0; i < sentence.wrongOptions.length; i++) {
-            let option: SSSOption = new SSSOption(sentence.wrongOptions[i], answerPosition, optionBox);
+            let option: SSSOption = new SSSOption(sentence.wrongOptions[i], answerPosition, optionBox, positon);
             if(option.wd <= 140) {
                 options.shortOptions.push(option);
             }
