@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":7,
-    "selecteID":16,
+    "selectedBox":6,
+    "selecteID":15,
     "props":{"width":120,"sceneColor":"#ffffff","height":110},
     "nodeParent":-1,
     "label":"View",
@@ -43,7 +43,7 @@
                 {
                     "x":30,
                     "type":"Text",
-                    "props":{"y":1,"x":0,"width":104,"var":"optionTextDisable","height":35,"fontSize":35,"font":"FF","color":"#ffffff","align":"center"},
+                    "props":{"y":-3,"x":0,"width":104,"var":"optionTextDisable","height":35,"fontSize":35,"font":"FF","color":"#ffffff","bold":true,"align":"center"},
                     "nodeParent":7,
                     "label":"Text(optionTextDisable)",
                     "isDirectory":false,
@@ -78,26 +78,28 @@
             "props":{"y":-1,"x":8,"var":"canMove"},
             "nodeParent":1,
             "label":"Box(canMove)",
-            "isOpen":null,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":18,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":70,"var":"optionBg","skin":"SplitScreenSentence/option.png"},
                     "nodeParent":18,
                     "label":"Image(optionBg)",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":6,
                     "child":[
                         {
+                            "x":45,
                             "type":"Text",
-                            "props":{"y":1,"x":0,"width":104,"var":"optionText","height":35,"fontSize":35,"font":"FF","color":"#000000","align":"center"},
+                            "props":{"y":-3,"x":0,"width":104,"var":"optionText","height":35,"fontSize":35,"font":"FF","color":"#000000","bold":true,"align":"center"},
                             "nodeParent":6,
                             "label":"Text(optionText)",
                             "isDirectory":false,
@@ -111,6 +113,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"x":18,"var":"fly1","skin":"SplitScreenSentence/fly-1.png"},
                     "nodeParent":18,
@@ -123,6 +126,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":7,"x":17,"var":"fly2","skin":"SplitScreenSentence/fly-2.png"},
                     "nodeParent":18,
@@ -136,6 +140,7 @@
                     "$HIDDEN":false
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "props":{"y":61,"x":40,"width":32,"skin":"SplitScreenSentence/rope.png","height":10},
                     "nodeParent":18,
@@ -150,7 +155,7 @@
                     "$LOCKED":true,
                     "$HIDDEN":false
                 }],
-            "$HIDDEN":false
+            "$HIDDEN":true
         }],
     "animations":[
         {
