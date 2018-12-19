@@ -138,7 +138,7 @@
         {
             "x":15,
             "type":"Text",
-            "props":{"y":168,"x":79,"wordWrap":true,"width":353,"var":"answerLeft","height":161,"fontSize":35,"font":"FF","color":"#000000","bold":true,"align":"left"},
+            "props":{"y":168,"x":79,"wordWrap":true,"width":353,"var":"answerLeft","leading":7,"height":161,"fontSize":35,"font":"FF","color":"#000000","bold":true,"align":"left"},
             "nodeParent":1,
             "label":"Text(answerLeft)",
             "isDirectory":false,
@@ -152,7 +152,7 @@
         {
             "x":15,
             "type":"Text",
-            "props":{"y":168,"x":596,"wordWrap":true,"width":353,"var":"answerRight","height":161,"fontSize":35,"font":"FF","color":"#000000","bold":true,"align":"left"},
+            "props":{"y":168,"x":596,"wordWrap":true,"width":353,"var":"answerRight","leading":7,"height":161,"fontSize":35,"font":"FF","color":"#000000","bold":true,"align":"left"},
             "nodeParent":1,
             "label":"Text(answerRight)",
             "isDirectory":false,
@@ -252,7 +252,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":399,"x":404,"var":"next","skin":"SplitScreenSentence/next.png"},
+            "props":{"y":391,"x":427,"var":"next","skin":"SplitScreenSentence/next.png"},
             "nodeParent":1,
             "label":"Image(next)",
             "isDirectory":false,
@@ -266,7 +266,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":163,"x":225,"var":"replay","skin":"SplitScreenSentence/replay.png"},
+            "props":{"y":245,"x":298,"var":"replay","skin":"SplitScreenSentence/replay.png"},
             "nodeParent":1,
             "label":"Image(replay)",
             "isDirectory":false,
