@@ -159,10 +159,10 @@ class SplitScreenSentenceMain extends ui.SplitScreenSentenceUI {
                 options.longOptions.push(option);
             }
         }
-        let indexes = [0 , 1, 2]
+        let indexes = [0 , 1, 2, 3]
         if(options.longOptions.length > 0) {
             for(let i: number = 0; i < options.longOptions.length; i++) {
-                if(i >= 3) {
+                if(i >= 4) {
                     break;
                 }
                 let j: number = Math.floor(Math.random() * indexes.length); // 随机一个选项
